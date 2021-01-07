@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>3D相册</title>
+	<link rel="stylesheet" href="style.css">
+</head>
+<body >
+	<div id="perspective">
+		<div id="wrap">
+			<div>
+				<img src="images/12.jpg" alt="">
+			</div>
+			<li class="img">
+				<img src="images/1.jpg" alt="">
+			</li>
+			<li class="img">
+				<img src="images/2.jpg" alt="">
+			</li>
+			<li class="img">
+				<img src="images/3.jpg" alt="">
+			</li>
+			<li class="img">
+				<img src="images/4.jpg" alt="">
+			</li>
+			<li class="img">
+				<img src="images/5.jpg" alt="">
+			</li>
+			<li class="img">
+				<img src="images/6.jpg" alt="">
+			</li>
+			<li class="img">
+				<img src="images/7.jpg" alt="">
+			</li>
+			<li class="img">
+				<img src="images/8.jpg" alt="">
+			</li>
+			<li class="img">
+				<img src="images/9.jpg" alt="">
+			</li>
+			<li class="img">
+				<img src="images/10.jpg" alt="">
+			</li>
+			<li class="img">
+				<img src="images/11.jpg" alt="">
+			</li>
+		</div>
+	</div>
+	<audio src="晴天 - 周杰伦.mp3" autoplay="autoplay"  preload="auto" controls="controls"></audio>
+	<script>//最重要的部分
+		var oImg = document.getElementsByClassName("img");
+		var deg = 360/oImg.length;
+		window.onload = function(){
+			for(var i = 0; i < oImg.length;i++){
+				oImg[i].style.transform = "rotateY("+deg*i+"deg) translateZ(350px)";
+				oImg[i].style.transition = "1s "+(oImg.length-i)*0.1+"s";
+			}
+		}
+		var newX,newY,sX,sY,lX,lY,rotateX = -15,rotateY = 0;
+		var oWrap = document.getElementById("wrap");
+		document.onmousedown = function(event){
+			lX = event.clientX;
+			lY = event.clientY;
+			this.onmousemove = function(event){
+				newX = event.clientX;
+				newY = event.clientY;
+				
+				sX = newX - lX;/*求两次移动距离差*/
+				sY = newY - lY;
+				
+				rotateX -= sY*0.2; 
+				rotateY += sX*0.1;
+				
+				oWrap.style.transform=" rotateX("+rotateX+"deg) rotateY("+rotateY+"deg)";
+
+				//当新的值用完就变成旧的值
+				lX = newX;
+				lY = newY;
+			}
+			this.onmouseup = function(event){
+				this.onmousemove = null;
+				var timer = setInterval(function(){
+					sX *= 0.95;
+					sY *= 0.95;
+					
+					rotateX -= sY*0.2; 
+					rotateY += sX*0.1;
+					
+					oWrap.style.transform=" rotateX("+rotateX+"deg) rotateY("+rotateY+"deg)";
+					
+					if(Math.abs(sX) < 0.1 && Math.abs(sY) < 0.1){
+						clearInterval(timer);
+					}
+				},13);
+			}
+		}
+	</script>
+</body>
+</html>

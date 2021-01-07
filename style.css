@@ -1,0 +1,38 @@
+*{margin: 0;padding: 0;}
+		body{
+			background: #000;
+			overflow: hidden;
+			user-select:none;
+			background: url(images/bg1.jpg);
+		}
+		#perspective{
+			perspective:800px;
+		}
+		#wrap{
+			position: relative;
+			width: 133px;
+			height: 200px;
+			margin: 150px auto;
+			box-shadow: 0 0 8px #f9f;
+			transform-style: preserve-3d;
+			transform: rotateX(-15deg) rotateY(0deg);
+		}
+		#wrap .img{
+			width: 133px;
+			height: 200px;
+			box-shadow: 0 0 8px #f9f;
+			position: absolute;
+			list-style: none;
+		}
+		#wrap img{
+			position: absolute;
+			width: 133px;
+			height: 200px;
+			filter: blur(1px);
+			transition: 1s;
+			-webkit-box-reflect: below 5px -webkit-linear-gradient(top,rgba(0,0,0,0) 30%,rgba(0,0,0,.5) 100%);
+		}
+		#wrap img:hover{
+			filter: blur(0px);
+			transform: scale(1.2);
+		}
